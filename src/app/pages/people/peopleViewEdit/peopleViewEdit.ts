@@ -26,15 +26,13 @@ export class PeopleComponent implements OnInit {
   @Output() complete: EventEmitter<boolean> = new EventEmitter(true);
 
   public loaded: boolean = false;
-
   public editMode: boolean = false;
-  public person: Person | undefined;
 
-  private personId: string | undefined = '';
+  public person: Person | undefined;
 
   personFormGroup: FormGroup = new FormGroup({
     isActive: new FormControl(true),
-    age: new FormControl(null, [Validators.required, Validators.min(18), Validators.max(110)]), // Min 18, Max 110
+    age: new FormControl(null, [Validators.required, Validators.min(18), Validators.max(110)]),
     fullName: new FormControl('', [Validators.required, Validators.maxLength(70)]),
     about: new FormControl('', [Validators.maxLength(250)]),
     gender: new FormControl('', [Validators.required])
@@ -53,10 +51,10 @@ export class PeopleComponent implements OnInit {
       }
 
       this.route.paramMap.subscribe(x => {
-        this.personId = this.route.snapshot.paramMap.get('id')?.toString();
+        let personId = this.route.snapshot.paramMap.get('id')?.toString();
 
-        if (this.personId) {
-          this.peopleService.getById(this.personId).subscribe(
+        if (personId !== undefined && personId?.trim() !== '') {
+          this.peopleService.getById(personId).subscribe(
             (x: Person) => {
               this.person = x;
 
@@ -77,7 +75,6 @@ export class PeopleComponent implements OnInit {
           )
         }
       });
-
     }
   }
 
