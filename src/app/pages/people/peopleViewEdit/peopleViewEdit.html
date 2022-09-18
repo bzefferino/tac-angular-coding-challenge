@@ -15,6 +15,11 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
                     <input matInput placeholder="Bob Smith" name="name" formControlName="fullName" required>
+                    <!-- I put the delete button here cause i was just gonna throw 
+                        it somewhere anyways so may as well break the laws and throw it somewherew cool -->
+                    <button matSuffix mat-icon-button color="warn" (click)="deletePerson()" matTooltip="Delete this person." matTooltipPosition="below">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
                 </mat-form-field>
             </div>
             <div class="row">
@@ -63,12 +68,12 @@
     </ng-template>
 
     <div class="buttons-container">
-        <button class="cancel-button" mat-raised-button (click)="return()">
+        <button class="cancel-button" mat-raised-button [autofocus]="false" (click)="return()">
             <mat-icon *ngIf="editMode">clear</mat-icon>
             <mat-icon *ngIf="!editMode">arrow_back</mat-icon>
             {{editMode ? 'Cancel' : 'Back'}}
         </button>
-        <button mat-raised-button color="accent" (click)="submit()" [disabled]="editMode && !personFormGroup.valid">
+        <button mat-raised-button color="accent" [disabled]="editMode && !personFormGroup.valid" [autofocus]="false" (click)="submit()">
             <mat-icon *ngIf="editMode">save</mat-icon>
             <mat-icon *ngIf="!editMode">edit</mat-icon>
             {{editMode ? 'Save' : 'Edit'}}

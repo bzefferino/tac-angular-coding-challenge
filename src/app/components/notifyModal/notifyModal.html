@@ -1,0 +1,14 @@
+<div class="modal-container">
+    <div mat-dialog-content class="title-message-container">
+        <div class="row">
+            <h1 mat-dialog-title>{{title}}</h1>
+        </div>
+        <div class="row">
+            <p class="message">{{message}}</p>
+        </div>
+    </div>
+    <div class="buttons-container">
+        <button mat-raised-button class="cancel-button" (click)="confirm(false)">Cancel</button>
+        <button mat-raised-button color="warn" (click)="confirm(true)">Delete</button>
+    </div>
+</div>

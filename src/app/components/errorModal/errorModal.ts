@@ -1,10 +1,9 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, Injectable } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './errorModal.component.html',
-  styleUrls: ['./errorModal.component.scss']
+  templateUrl: './errorModal.html',
+  styleUrls: ['./errorModal.scss']
 })
 export class ErrorModalComponent {
 
@@ -43,7 +42,7 @@ export class ErrorModalHelper {
     }
     else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Error Code ${error.status} - ${error.message}`;
     }
 
     const dialogConfig = new MatDialogConfig();

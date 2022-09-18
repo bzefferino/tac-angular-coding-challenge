@@ -1,0 +1,23 @@
+// Active bug in angular where the mat-dialog-actions arent positioned properly. Here's a quick fix;
+.modal-container {
+    position: relative;
+    height: 100%;
+}
+
+.title-message-container {
+    height: 150px;
+}
+
+.cancel-button {
+    margin-right: 10px;
+}
+
+.message {
+    font-size: 12px;
+}
+
+.buttons-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}

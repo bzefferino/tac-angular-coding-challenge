@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService as PeopleService } from 'src/app/services/people.service';
 import { Person } from 'src/app/models/person';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotifyModalHelper } from 'src/app/components/notifyModal/notifyModal';
 
 @Component({
   selector: 'people',
@@ -17,6 +18,7 @@ export class PeopleComponent implements OnInit {
 
   constructor(
     private location: Location,
+    private notifyModalHelper: NotifyModalHelper,
     private peopleService: PeopleService,
     private route: ActivatedRoute,
     private router: Router
@@ -83,15 +85,33 @@ export class PeopleComponent implements OnInit {
     }
   }
 
-  return() {
-    // Don't necessarily know where they came from if a bigger project,
-    // so used location back. I think this is more useful.
-    if (this.editMode) {
-      this.location.back();
+  deletePerson() {
+    // Get personalized title if available 
+    let name: string = this.personFormGroup.controls['fullName'].value;
+    if (name.trim().length === 0) {
+      if (this.person) {
+        name = this.person.name;
+      }
+      else {
+        name = 'Record';
+      }
     }
-    else {
-      this.router.navigateByUrl('/');
-    }
+
+    this.notifyModalHelper.confirm(`Delete ${name}?`, 'Warning: this action cannot be undone.').afterClosed().subscribe(
+      (confirmed: boolean) => {
+        if (confirmed) {
+          if (this.person) {
+            this.loaded = false;
+            this.peopleService.delete(this.person.id).subscribe(
+              (x) => {
+                this.loaded = true;
+                this.router.navigateByUrl('/');
+              }
+            );
+          }
+        }
+      }
+    )
   }
 
   submit() {
@@ -111,8 +131,12 @@ export class PeopleComponent implements OnInit {
         this.person.gender = this.personFormGroup.controls['gender'].value;
         this.person.about = this.personFormGroup.controls['about'].value;
 
+        this.loaded = false;
+
         this.peopleService.save(this.person).subscribe(
           (x: Person) => {
+            this.loaded = true;
+
             this.router.navigateByUrl(`people/${x.id}`);
 
             // Emit complete event here to let the modal know it can close
@@ -120,6 +144,17 @@ export class PeopleComponent implements OnInit {
           }
         );
       }
+    }
+  }
+
+  return() {
+    // Don't necessarily know where they came from if a bigger project,
+    // so used location back. I think this is more useful.
+    if (this.editMode) {
+      this.location.back();
+    }
+    else {
+      this.router.navigateByUrl('/');
     }
   }
 }

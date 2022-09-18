@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ErrorModalHelper } from 'src/app/components/errorModal/errorModal.component';
+import { ErrorModalHelper } from 'src/app/components/errorModal/errorModal';
 import { PeopleService as PeopleService } from 'src/app/services/people.service';
 import { Person } from 'src/app/models/person';
 import { AddPersonModalHelper } from '../addPersonModal/addPersonModal';

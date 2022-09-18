@@ -18,12 +18,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { ErrorModalComponent, ErrorModalHelper } from './components/errorModal/errorModal.component';
+import { ErrorModalComponent, ErrorModalHelper } from './components/errorModal/errorModal';
 import { LoadingOverlayComponent } from './components/loadingOverlay/loading-overlay/loading-overlay.component';
-import { PeopleLookupComponent } from './pages/people/peopleLookup/peopleLookup';
-import { MomentPipe } from './pipes/momentPipe';
-import { PeopleComponent } from './pages/people/peopleViewEdit/peopleViewEdit';
+import { NotifyModalComponent } from './components/notifyModal/notifyModal';
 import { AddPersonModalComponent, AddPersonModalHelper } from './pages/people/addPersonModal/addPersonModal';
+import { PeopleLookupComponent } from './pages/people/peopleLookup/peopleLookup';
+import { PeopleComponent } from './pages/people/peopleViewEdit/peopleViewEdit';
+import { MomentPipe } from './pipes/momentPipe';
 
 // Instead of having the routes in a separate module,
 // I added them here so that they are contained within the module they apply
@@ -44,6 +45,7 @@ const routes: Routes = [
     AppComponent,
     ErrorModalComponent,
     MomentPipe,
+    NotifyModalComponent,
     PeopleLookupComponent,
     PeopleComponent,
     LoadingOverlayComponent,
@@ -67,10 +69,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [
-    ErrorModalHelper,
-    AddPersonModalHelper
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

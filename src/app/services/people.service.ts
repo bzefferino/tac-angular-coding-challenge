@@ -3,8 +3,6 @@
 // is the extent of error handling for this demo
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import { ignoreElements } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
@@ -19,6 +17,7 @@ export class PeopleService {
 
   constructor(private http: HttpClient) { }
 
+  // Cache
   private people: BehaviorSubject<Person[]> = new BehaviorSubject<Person[]>([]);
 
   private readonly PEOPLE_ENDPOINT = `${environment.baseUrl}/people`;
@@ -65,6 +64,18 @@ export class PeopleService {
         })
       );
     }
+  }
+
+  delete(personId: string) {
+    return this.http.delete(this.PEOPLE_ENDPOINT + `/${personId}`).pipe(
+      map(x => {
+        let index: number = this.people.value.findIndex(x => x.id === personId);
+        if (index > 0) {
+          this.people.value.splice(index, 1);
+        }
+        return x;
+      })
+    );
   }
 
   getBlankPerson(): Person {

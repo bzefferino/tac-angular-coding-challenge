@@ -1,52 +1,11 @@
 {
   "people": [
     {
-      "id": "6026f08fffabf364acbfca9a",
-      "isActive": true,
-      "balance": "$3,687.74",
-      "picture": "http://placehold.it/32x32",
-      "age": 99,
-      "eyeColor": "green",
-      "name": "Benito Zefferino",
-      "gender": "male",
-      "company": "DECRATEX",
-      "email": "calhounhumphrey@decratex.com",
-      "phone": "+1 (896) 573-3098",
-      "about": "I am the coolest",
-      "registered": "2015-02-22T04:07:17 +07:00",
-      "latitude": 52.388239,
-      "longitude": 52.274162,
-      "tags": [
-        "eu",
-        "tempor",
-        "velit",
-        "nostrud",
-        "do",
-        "eiusmod",
-        "laborum"
-      ],
-      "friends": [
-        {
-          "id": 0,
-          "name": "Gwendolyn Jensen"
-        },
-        {
-          "id": 1,
-          "name": "Carey Holder"
-        },
-        {
-          "id": 2,
-          "name": "Anne Noel"
-        }
-      ],
-      "fullName": "Calhoun Hump"
-    },
-    {
       "id": "6026f08fdd4ee2b4cb4866c0",
       "isActive": true,
       "balance": "$1,655.27",
       "picture": "http://placehold.it/32x32",
-      "age": 36,
+      "age": 48,
       "eyeColor": "blue",
       "name": "Marianne Mcneil",
       "gender": "female",
