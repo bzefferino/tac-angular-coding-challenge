@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ErrorModalHelper } from 'src/app/components/errorModal/errorModal.component';
 import { PeopleService as PeopleService } from 'src/app/services/people.service';
 import { Person } from 'src/app/models/person';
+import { AddPersonModalHelper } from '../addPersonModal/addPersonModal';
 
 @Component({
   selector: 'people-lookup',
@@ -12,6 +13,7 @@ import { Person } from 'src/app/models/person';
 export class PeopleLookupComponent implements OnInit {
 
   constructor(
+    private addPersonModalHelper: AddPersonModalHelper,
     private errorModalHelper: ErrorModalHelper,
     private personService: PeopleService,
     private router: Router
@@ -37,7 +39,7 @@ export class PeopleLookupComponent implements OnInit {
   }
 
   add() {
-
+    this.addPersonModalHelper.show();
   }
 
   view(person: Person) {

@@ -22,7 +22,8 @@ import { ErrorModalComponent, ErrorModalHelper } from './components/errorModal/e
 import { LoadingOverlayComponent } from './components/loadingOverlay/loading-overlay/loading-overlay.component';
 import { PeopleLookupComponent } from './pages/people/lookup/peopleLookup';
 import { MomentPipe } from './pipes/momentPipe';
-import { PeopleComponent } from './pages/people/edit/people';
+import { PeopleComponent } from './pages/people/viewOrEdit/people';
+import { AddPersonModalComponent, AddPersonModalHelper } from './pages/people/addPersonModal/addPersonModal';
 
 // Instead of having the routes in a separate module,
 // I added them here so that they are contained within the module they apply
@@ -39,6 +40,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    AddPersonModalComponent,
     AppComponent,
     ErrorModalComponent,
     MomentPipe,
@@ -66,7 +68,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    ErrorModalHelper
+    ErrorModalHelper,
+    AddPersonModalHelper
   ],
   bootstrap: [AppComponent]
 })

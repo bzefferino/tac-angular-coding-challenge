@@ -14,5 +14,4 @@ export interface Person {
     name: string;
     registered: string;
     about: string;
-    picture: string;
 }

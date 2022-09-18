@@ -1,13 +1,13 @@
-<mat-card style="margin-top: calc(-100vh + 800px)">
+<loading-overlay *ngIf="!loaded"></loading-overlay>
+<mat-card [class.page-view]="pageView">
     <form *ngIf="editMode; else viewMode" [formGroup]="personFormGroup" autoActiveFirstOption>
         <div class="person-form-content">
-
             <div class="row">
                 <div class="col">
-                    <h2>Edit Person</h2>
+                    <h2>{{ pageView ? 'Edit' : 'Add New' }} Person</h2>
                 </div>
 
-                <div class="active-status-container">
+                <div *ngIf="pageView" class="active-status-container">
                     <mat-slide-toggle formControlName="isActive" [labelPosition]="'before'">Active</mat-slide-toggle>
                 </div>
             </div>
@@ -38,11 +38,9 @@
                     <textarea matInput formControlName="about" maxlength="250" rows="10"></textarea>
                 </mat-form-field>
             </div>
-            <mat-error *ngIf="personFormGroup.controls['fullName'].invalid">Please ensure length is less than 70 characters.</mat-error>
-            <mat-error *ngIf="personFormGroup.controls['age'].invalid">Age range is 18-110 years old.</mat-error>
-            <mat-error *ngIf="personFormGroup.controls['about'].invalid">Please ensure length is less than 250 characters.</mat-error>
-
-
+            <mat-error *ngIf="personFormGroup.controls['fullName'].dirty && personFormGroup.controls['fullName'].invalid">Please ensure length is less than 70 characters.</mat-error>
+            <mat-error *ngIf="personFormGroup.controls['age'].dirty && personFormGroup.controls['age'].invalid">Age range is 18-110 years old.</mat-error>
+            <mat-error *ngIf="personFormGroup.controls['about'].dirty && personFormGroup.controls['about'].invalid">Please ensure length is less than 250 characters.</mat-error>
         </div>
     </form>
 

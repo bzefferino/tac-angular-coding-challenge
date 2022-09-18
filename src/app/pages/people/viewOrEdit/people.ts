@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeopleService as PeopleService } from 'src/app/services/people.service';
@@ -19,13 +19,18 @@ export class PeopleComponent implements OnInit {
     private router: Router
   ) { }
 
+  @Input() pageView: boolean = true;
+  @Output() complete: EventEmitter<boolean> = new EventEmitter(true);
+
+  public loaded: boolean = false;
+
   public editMode: boolean = false;
   public person: Person | undefined;
 
   private personId: string | undefined = '';
 
   personFormGroup: FormGroup = new FormGroup({
-    isActive: new FormControl(false),
+    isActive: new FormControl(true),
     age: new FormControl(null, [Validators.required, Validators.min(18), Validators.max(110)]), // Min 18, Max 110
     fullName: new FormControl('', [Validators.required, Validators.maxLength(70)]),
     about: new FormControl('', [Validators.maxLength(250)]),
@@ -33,36 +38,43 @@ export class PeopleComponent implements OnInit {
   });
 
   ngOnInit() {
-    if (this.router.url.includes('edit')) {
-      this.editMode = true;
-    }
-
-    this.route.paramMap.subscribe(x => {
-
-      this.personId = this.route.snapshot.paramMap.get('id')?.toString();
-
-      if (this.personId) {
-
-        this.peopleService.getById(this.personId).subscribe(
-          (x: Person) => {
-            this.person = x;
-
-            // Only necessary to update the form if in edit mode.
-            if (this.editMode) {
-              this.personFormGroup.patchValue({
-                isActive: x.isActive,
-                age: x.age,
-                gender: x.gender,
-                fullName: x.name,
-                about: x.about,
-              });
-
-              this.personFormGroup.markAllAsTouched();
-            }
-          }
-        )
+    if (this.pageView) {
+      if (this.router.url.includes('edit')) {
+        this.editMode = true;
       }
-    });
+
+      this.route.paramMap.subscribe(x => {
+        this.personId = this.route.snapshot.paramMap.get('id')?.toString();
+
+        if (this.personId) {
+          this.peopleService.getById(this.personId).subscribe(
+            (x: Person) => {
+              this.person = x;
+
+              // Only necessary to update the form if in edit mode.
+              if (this.editMode) {
+                this.personFormGroup.patchValue({
+                  isActive: x.isActive,
+                  age: x.age,
+                  gender: x.gender,
+                  fullName: x.name,
+                  about: x.about,
+                });
+
+                this.personFormGroup.markAllAsTouched();
+              }
+              this.loaded = true;
+            }
+          )
+        }
+      });
+    }
+    else {
+      // in a modal.. adding a new person.
+      this.loaded = true;
+      this.editMode = true;
+      this.person = this.peopleService.getBlankPerson()
+    }
   }
 
   return() {
@@ -76,7 +88,6 @@ export class PeopleComponent implements OnInit {
   }
 
   submit() {
-
     if (!this.editMode && this.person) {
       this.router.navigateByUrl(`people/${this.person.id}/edit`);
     }
@@ -90,12 +101,13 @@ export class PeopleComponent implements OnInit {
         this.person.gender = this.personFormGroup.controls['gender'].value;
         this.person.about = this.personFormGroup.controls['about'].value;
 
-        this.peopleService.update(this.person);
-
-        this.router.navigateByUrl(`people/${this.person.id}`);
-
+        this.peopleService.save(this.person).subscribe(
+          (x: Person) => {
+            this.router.navigateByUrl(`people/${x.id}`);
+            this.complete.emit();
+          }
+        );
       }
     }
   }
-
 }
