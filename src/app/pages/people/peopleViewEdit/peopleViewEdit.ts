@@ -7,9 +7,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'people',
-  templateUrl: './people.html',
-  styleUrls: ['./people.scss']
+  templateUrl: './peopleViewEdit.html',
+  styleUrls: ['./peopleViewEdit.scss']
 })
+
+// This component allows for use in a modal which you can add a new Person (addPersonView Input),
+// or it can be used on a page to edit or view a person. 
 export class PeopleComponent implements OnInit {
 
   constructor(
@@ -19,7 +22,7 @@ export class PeopleComponent implements OnInit {
     private router: Router
   ) { }
 
-  @Input() pageView: boolean = true;
+  @Input() addPersonView: boolean = false;
   @Output() complete: EventEmitter<boolean> = new EventEmitter(true);
 
   public loaded: boolean = false;
@@ -38,7 +41,13 @@ export class PeopleComponent implements OnInit {
   });
 
   ngOnInit() {
-    if (this.pageView) {
+    if (this.addPersonView) {
+      // in a modal.. adding a new person.
+      this.loaded = true;
+      this.editMode = true;
+      this.person = this.peopleService.getBlankPerson()
+    }
+    else {
       if (this.router.url.includes('edit')) {
         this.editMode = true;
       }
@@ -68,12 +77,7 @@ export class PeopleComponent implements OnInit {
           )
         }
       });
-    }
-    else {
-      // in a modal.. adding a new person.
-      this.loaded = true;
-      this.editMode = true;
-      this.person = this.peopleService.getBlankPerson()
+
     }
   }
 

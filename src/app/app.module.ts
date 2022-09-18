@@ -20,9 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ErrorModalComponent, ErrorModalHelper } from './components/errorModal/errorModal.component';
 import { LoadingOverlayComponent } from './components/loadingOverlay/loading-overlay/loading-overlay.component';
-import { PeopleLookupComponent } from './pages/people/lookup/peopleLookup';
+import { PeopleLookupComponent } from './pages/people/peopleLookup/peopleLookup';
 import { MomentPipe } from './pipes/momentPipe';
-import { PeopleComponent } from './pages/people/viewOrEdit/people';
+import { PeopleComponent } from './pages/people/peopleViewEdit/peopleViewEdit';
 import { AddPersonModalComponent, AddPersonModalHelper } from './pages/people/addPersonModal/addPersonModal';
 
 // Instead of having the routes in a separate module,

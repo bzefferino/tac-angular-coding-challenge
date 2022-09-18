@@ -1,13 +1,13 @@
 <loading-overlay *ngIf="!loaded"></loading-overlay>
-<mat-card [class.page-view]="pageView">
+
+<mat-card [class.page-view]="!addPersonView">
     <form *ngIf="editMode; else viewMode" [formGroup]="personFormGroup" autoActiveFirstOption>
         <div class="person-form-content">
             <div class="row">
                 <div class="col">
-                    <h2>{{ pageView ? 'Edit' : 'Add New' }} Person</h2>
+                    <h2>{{ addPersonView ? 'Add New' : 'Edit' }} Person</h2>
                 </div>
-
-                <div *ngIf="pageView" class="active-status-container">
+                <div *ngIf="!addPersonView" class="active-status-container">
                     <mat-slide-toggle formControlName="isActive" [labelPosition]="'before'">Active</mat-slide-toggle>
                 </div>
             </div>
