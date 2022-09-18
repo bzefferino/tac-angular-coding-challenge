@@ -40,4 +40,18 @@ export class PeopleService {
   getById(id: string): Observable<Person> {
     return this.http.get<Person>(this.PEOPLE_ENDPOINT + `/${id}`);
   }
+
+  update(person: Person) {
+
+    return this.http.put<Person>(this.PEOPLE_ENDPOINT + `/${person.id}`, person).subscribe(
+      (x) => {
+        console.log('returned from put.. x = ', x);
+
+        // Update entry in cached list
+        let index: number = this.people.value.findIndex(y => y.id === person.id);
+        this.people.value[index] = { ...x };
+      }
+    );
+
+  }
 }

@@ -1,0 +1,53 @@
+.active-status-container {
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.person-form-content {
+    width: 316px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.display-about {
+    max-width: 250px;
+}
+
+.buttons-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel-button {
+    margin-right: 15px;
+}
+
+.display {
+    &-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-about {
+        max-width: 250px;
+    }
+
+    &-name {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+h3 {
+    font-weight: 500;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+span {
+    margin-bottom: 5px;
+}

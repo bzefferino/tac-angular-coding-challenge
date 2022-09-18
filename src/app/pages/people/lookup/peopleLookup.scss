@@ -9,7 +9,7 @@
 .person-table-container {
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(80vh - 32px);
+    max-height: calc(80vh - 60px);
 }
 
 .person-lookup-table {
@@ -38,4 +38,10 @@
     td {
         color: rgb(148, 148, 148) !important;
     }
+}
+
+.add-button {
+    position: absolute;
+    right: 25px;
+    top: 20px;
 }

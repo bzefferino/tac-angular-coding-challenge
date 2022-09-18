@@ -1,5 +1,5 @@
 <mat-card style="margin-top: calc(-100vh + 800px)">
-    <form [formGroup]="personFormGroup" (ngSubmit)="save(personFormGroup.value)" autoActiveFirstOption>
+    <form *ngIf="editMode; else viewMode" [formGroup]="personFormGroup" autoActiveFirstOption>
         <div class="person-form-content">
 
             <div class="row">
@@ -7,7 +7,7 @@
                     <h2>Edit Person</h2>
                 </div>
 
-                <div class="active-toggle-container">
+                <div class="active-status-container">
                     <mat-slide-toggle formControlName="isActive" [labelPosition]="'before'">Active</mat-slide-toggle>
                 </div>
             </div>
@@ -30,7 +30,6 @@
                         <mat-option value="female">Female</mat-option>
                         <mat-option value="other">Other</mat-option>
                     </mat-select>
-                    <!-- <mat-error *ngIf="emailFormGroup.controls['email'].invalid">{{getErrorMessage()}}</mat-error> -->
                 </mat-form-field>
             </div>
             <div class="row">
@@ -43,16 +42,38 @@
             <mat-error *ngIf="personFormGroup.controls['age'].invalid">Age range is 18-110 years old.</mat-error>
             <mat-error *ngIf="personFormGroup.controls['about'].invalid">Please ensure length is less than 250 characters.</mat-error>
 
-            <div class="buttons-container">
-                <button class="cancel-button" mat-raised-button color="accent" (click)="return()">
-                    <mat-icon>clear</mat-icon>
-                    Cancel
-                </button>
-                <button mat-raised-button color="primary" type="submit" [disabled]="!personFormGroup.valid">
-                    <mat-icon>save</mat-icon>
-                    Save
-                </button>
-            </div>
+
         </div>
     </form>
+
+    <ng-template #viewMode>
+        <div class="display-container">
+            <img src="https://via.placeholder.com/150">
+            <h1 class="display-name">{{person?.name}}</h1>
+            <span>
+                <h3>Status: </h3>{{person?.isActive ? 'Is Active' : 'Disabled'}}
+            </span>
+            <span>
+                <h3>Age:</h3>{{person?.age}}
+            </span>
+            <span>
+                <h3>Gender:</h3>{{person?.gender | titlecase}}
+            </span>
+            <h3>About: </h3>
+            <p class="display-about">{{person?.about}}</p>
+        </div>
+    </ng-template>
+
+    <div class="buttons-container">
+        <button class="cancel-button" mat-raised-button (click)="return()">
+            <mat-icon *ngIf="editMode">clear</mat-icon>
+            <mat-icon *ngIf="!editMode">arrow_back</mat-icon>
+            {{editMode ? 'Cancel' : 'Back'}}
+        </button>
+        <button mat-raised-button color="accent" (click)="submit()" [disabled]="editMode && !personFormGroup.valid">
+            <mat-icon *ngIf="editMode">save</mat-icon>
+            <mat-icon *ngIf="!editMode">edit</mat-icon>
+            {{editMode ? 'Save' : 'Edit'}}
+        </button>
+    </div>
 </mat-card>

@@ -5,14 +5,14 @@
       "isActive": true,
       "balance": "$3,687.74",
       "picture": "http://placehold.it/32x32",
-      "age": 24,
+      "age": 99,
       "eyeColor": "green",
-      "name": "Calhoun Humphrey",
+      "name": "Benito Zefferino",
       "gender": "male",
       "company": "DECRATEX",
       "email": "calhounhumphrey@decratex.com",
       "phone": "+1 (896) 573-3098",
-      "about": "Cillum enim ut nostrud dolor veniam fugiat. Irure voluptate culpa anim deserunt nulla Lorem culpa eu ea in deserunt deserunt cupidatat ea. Sint voluptate proident ad duis. Ipsum nisi eiusmod culpa quis magna consequat exercitation id enim. Aliquip eiusmod pariatur ut voluptate fugiat et sit ea ad.\r\n",
+      "about": "I am the coolest",
       "registered": "2015-02-22T04:07:17 +07:00",
       "latitude": 52.388239,
       "longitude": 52.274162,
@@ -38,7 +38,8 @@
           "id": 2,
           "name": "Anne Noel"
         }
-      ]
+      ],
+      "fullName": "Calhoun Hump"
     },
     {
       "id": "6026f08fdd4ee2b4cb4866c0",
@@ -52,7 +53,7 @@
       "company": "ZENOLUX",
       "email": "mariannemcneil@zenolux.com",
       "phone": "+1 (904) 586-2505",
-      "about": "Culpa do laboris labore magna ullamco ea. Incididunt do qui commodo ut elit consectetur eu laborum fugiat eu incididunt commodo dolor incididunt. Et deserunt excepteur laborum Lorem magna et aliqua Lorem excepteur deserunt qui labore deserunt dolore. Officia ea Lorem enim incididunt est voluptate pariatur sit eiusmod labore magna. Do et non ad proident enim laboris. Do labore veniam culpa aliqua sit.\r\n",
+      "about": "Culpa do laboris labore magna ullamco ea. Incididunt do qui commodo ut elit consectetur eu laborum fugiat eu incididunt commodo dolor incididunt. Et deserunt excepteur laborum.\n",
       "registered": "2014-03-11T07:11:17 +06:00",
       "latitude": 73.49796,
       "longitude": 13.570493,

@@ -36,8 +36,15 @@ export class PeopleLookupComponent implements OnInit {
     )
   }
 
+  add() {
+
+  }
+
+  view(person: Person) {
+    this.router.navigateByUrl(`people/${person.id}`);
+  }
+
   edit(person: Person) {
-    console.log('in edit... id =>', person.id);
     this.router.navigateByUrl(`people/${person.id}/edit`);
   }
 

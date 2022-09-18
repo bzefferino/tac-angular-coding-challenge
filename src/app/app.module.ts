@@ -20,9 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ErrorModalComponent, ErrorModalHelper } from './components/errorModal/errorModal.component';
 import { LoadingOverlayComponent } from './components/loadingOverlay/loading-overlay/loading-overlay.component';
-import { PeopleEditComponent } from './pages/people/edit/people-edit/people-edit.component';
 import { PeopleLookupComponent } from './pages/people/lookup/peopleLookup';
 import { MomentPipe } from './pipes/momentPipe';
+import { PeopleComponent } from './pages/people/edit/people';
 
 // Instead of having the routes in a separate module,
 // I added them here so that they are contained within the module they apply
@@ -30,7 +30,8 @@ import { MomentPipe } from './pipes/momentPipe';
 // to an existing project I figured it made sense to try it this way
 const routes: Routes = [
   { path: '', redirectTo: '/people', pathMatch: 'full' },
-  { path: 'people/:id/edit', component: PeopleEditComponent },
+  { path: 'people/:id/edit', component: PeopleComponent },
+  { path: 'people/:id', component: PeopleComponent },
   { path: 'people', component: PeopleLookupComponent },
   { path: '**', redirectTo: '/people' },
 
@@ -42,7 +43,7 @@ const routes: Routes = [
     ErrorModalComponent,
     MomentPipe,
     PeopleLookupComponent,
-    PeopleEditComponent,
+    PeopleComponent,
     LoadingOverlayComponent,
   ],
   imports: [
