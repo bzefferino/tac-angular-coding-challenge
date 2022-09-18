@@ -3,6 +3,7 @@
 // is the extent of error handling for this demo
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
@@ -31,10 +32,23 @@ export class PeopleService {
         .pipe(
           map(x => {
             this.people.next(x as Person[]);
+            this.sortData();
             return x as Person[];
           })
         );
     }
+  }
+
+  // Not going for speed here
+  // Would be overridden by a table datasource sort but cleaning the initial data for now.
+  sortData() {
+    let formatToCompare: string = 'YYYY-MM-DD';
+
+    this.people.next(
+      this.people.value.sort((a, b) => {
+        return moment(a.registered, formatToCompare).isBefore(moment(b.registered, formatToCompare)) ? 1 : -1;
+      })
+    );
   }
 
   getById(id: string): Observable<Person> {
@@ -42,13 +56,12 @@ export class PeopleService {
   }
 
   save(person: Person): Observable<Person> {
-
     if (person.id) {
       // Update existing record
       return this.http.put<Person>(this.PEOPLE_ENDPOINT + `/${person.id}`, person).pipe(
         map(x => {
           let index: number = this.people.value.findIndex(y => y.id === person.id); ``
-          if (index > 0) {
+          if (index >= 0) {
             this.people.value[index] = { ...x };
           }
           return x;
@@ -60,6 +73,7 @@ export class PeopleService {
       return this.http.post<Person>(this.PEOPLE_ENDPOINT, person).pipe(
         map(x => {
           this.people.value.push(x);
+          this.sortData();
           return x;
         })
       );
@@ -70,7 +84,7 @@ export class PeopleService {
     return this.http.delete(this.PEOPLE_ENDPOINT + `/${personId}`).pipe(
       map(x => {
         let index: number = this.people.value.findIndex(x => x.id === personId);
-        if (index > 0) {
+        if (index >= 0) {
           this.people.value.splice(index, 1);
         }
         return x;
@@ -85,7 +99,7 @@ export class PeopleService {
       age: 0,
       gender: '',
       name: '',
-      registered: new Date().toUTCString(),
+      registered: new Date().toISOString(),
       about: ''
     }
   }

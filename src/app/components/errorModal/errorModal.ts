@@ -42,7 +42,7 @@ export class ErrorModalHelper {
     }
     else {
       // Get server-side error
-      errorMessage = `Error Code ${error.status} - ${error.message}`;
+      errorMessage = `Error Code ${error.status} - ${error.message}. Check that the server is running.`;
     }
 
     const dialogConfig = new MatDialogConfig();

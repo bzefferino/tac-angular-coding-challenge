@@ -17,7 +17,7 @@
                     <input matInput placeholder="Bob Smith" name="name" formControlName="fullName" required>
                     <!-- I put the delete button here cause i was just gonna throw 
                         it somewhere anyways so may as well break the laws and throw it somewherew cool -->
-                    <button matSuffix mat-icon-button color="warn" (click)="deletePerson()" matTooltip="Delete this person." matTooltipPosition="below">
+                    <button matSuffix mat-icon-button type="button" *ngIf="!addPersonView" color="warn" (click)="deletePerson()" matTooltip="Delete this person." matTooltipPosition="below">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
                 </mat-form-field>
