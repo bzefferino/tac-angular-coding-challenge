@@ -1,1 +1,58 @@
-<p>people-edit works!</p>
+<mat-card style="margin-top: calc(-100vh + 800px)">
+    <form [formGroup]="personFormGroup" (ngSubmit)="save(personFormGroup.value)" autoActiveFirstOption>
+        <div class="person-form-content">
+
+            <div class="row">
+                <div class="col">
+                    <h2>Edit Person</h2>
+                </div>
+
+                <div class="active-toggle-container">
+                    <mat-slide-toggle formControlName="isActive" [labelPosition]="'before'">Active</mat-slide-toggle>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Bob Smith" name="name" formControlName="fullName" required>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="col-third">
+                    <mat-label>Age</mat-label>
+                    <input matInput name="age" formControlName="age" type="number" required>
+
+                </mat-form-field>
+                <mat-form-field class="col-twoThirds" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select name="gender" formControlName="gender" required>
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                        <mat-option value="other">Other</mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="emailFormGroup.controls['email'].invalid">{{getErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>About</mat-label>
+                    <textarea matInput formControlName="about" maxlength="250" rows="10"></textarea>
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="personFormGroup.controls['fullName'].invalid">Please ensure length is less than 70 characters.</mat-error>
+            <mat-error *ngIf="personFormGroup.controls['age'].invalid">Age range is 18-110 years old.</mat-error>
+            <mat-error *ngIf="personFormGroup.controls['about'].invalid">Please ensure length is less than 250 characters.</mat-error>
+
+            <div class="buttons-container">
+                <button class="cancel-button" mat-raised-button color="accent" (click)="return()">
+                    <mat-icon>clear</mat-icon>
+                    Cancel
+                </button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!personFormGroup.valid">
+                    <mat-icon>save</mat-icon>
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-card>

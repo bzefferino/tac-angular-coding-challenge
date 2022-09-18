@@ -53,3 +53,24 @@ body {
 .col {
     flex: 1;
 }
+
+.col:last-child {
+    margin-right: 0;
+}
+
+.col-half {
+    width: 50%;
+    margin-right: 10px;
+}
+
+.col-third {
+    width: 33%;
+    max-width: 33%;
+    margin-right: 10px;
+}
+
+.col-twoThirds {
+    width: 66%;
+    max-width: 66%;
+    margin-right: 10px;
+}

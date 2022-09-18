@@ -5,6 +5,8 @@ export interface Person {
     id: string;
     isActive: boolean;
     age: number;
+    gender: string;
     name: string;
     registered: string;
+    about: string;
 }
