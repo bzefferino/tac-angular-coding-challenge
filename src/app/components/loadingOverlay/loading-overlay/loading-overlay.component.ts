@@ -6,11 +6,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./loading-overlay.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoadingOverlayComponent implements OnInit {
+export class LoadingOverlayComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

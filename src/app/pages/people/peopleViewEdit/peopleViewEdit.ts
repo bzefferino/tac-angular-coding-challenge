@@ -50,15 +50,19 @@ export class PeopleComponent implements OnInit {
         this.editMode = true;
       }
 
+      // Get the id passed through as a parameter
       this.route.paramMap.subscribe(x => {
-        let personId = this.route.snapshot.paramMap.get('id')?.toString();
+        let personId: string | undefined = this.route.snapshot.paramMap.get('id')?.toString();
 
         if (personId !== undefined && personId?.trim() !== '') {
+
+          // Make the call to the service
           this.peopleService.getById(personId).subscribe(
             (x: Person) => {
               this.person = x;
 
-              // Only necessary to update the form if in edit mode.
+              // Only necessary to update the form if in edit mode 
+              // otherwise we are doing this in view mode.
               if (this.editMode) {
                 this.personFormGroup.patchValue({
                   isActive: x.isActive,
@@ -70,6 +74,7 @@ export class PeopleComponent implements OnInit {
 
                 this.personFormGroup.markAllAsTouched();
               }
+
               this.loaded = true;
             }
           )
@@ -79,7 +84,8 @@ export class PeopleComponent implements OnInit {
   }
 
   return() {
-    // Don't necessarily know where they came from if a bigger project.
+    // Don't necessarily know where they came from if a bigger project,
+    // so used location back. I think this is more useful.
     if (this.editMode) {
       this.location.back();
     }
@@ -89,12 +95,15 @@ export class PeopleComponent implements OnInit {
   }
 
   submit() {
+    // This means they clicked the button in view mode, the button would have said
+    // "Edit", so the easiest way to update the page is to just navigate. This will
+    // grab the latest data for the person anyways in case someone else is making changes
     if (!this.editMode && this.person) {
       this.router.navigateByUrl(`people/${this.person.id}/edit`);
     }
     else {
       // Was using the spread operator to update the object, but because of mismatch in naming (fullName in form vs name in model)
-      // it can mess up the database and have updated it to take each piece of data individually to be more safe.
+      // it can mess up the database and have updated it to take each piece of data individually to be safe.
       if (this.person && this.personFormGroup.valid) {
         this.person.isActive = this.personFormGroup.controls['isActive'].value;
         this.person.name = this.personFormGroup.controls['fullName'].value;
@@ -105,6 +114,8 @@ export class PeopleComponent implements OnInit {
         this.peopleService.save(this.person).subscribe(
           (x: Person) => {
             this.router.navigateByUrl(`people/${x.id}`);
+
+            // Emit complete event here to let the modal know it can close
             this.complete.emit();
           }
         );

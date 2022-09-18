@@ -27,7 +27,11 @@ export class ErrorModalHelper {
 
   displayError(error: any) {
 
-    // Would typically do checking for error status (401, etc.), but will allow for default in this case.
+    // Would typically do checking for error status (401, etc.) and route to 
+    // custom pages, but will skip for this demo because of time.
+    // I would do that through an HTTP service or something that can catch 
+    // and intercept the error
+
     let errorMessage: string = '';
 
     if (typeof error === 'string') {
