@@ -1,0 +1,40 @@
+<loading-overlay *ngIf="!loaded"></loading-overlay>
+
+<mat-card class="person-lookup-card">
+    <mat-card-header>
+        <mat-card-title>People</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="person-table-container">
+        <table mat-table [dataSource]="dataSource" class="person-lookup-table">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let person"> {{person.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="registered">
+                <th mat-header-cell *matHeaderCellDef> Date Registered </th>
+                <td mat-cell *matCellDef="let person"> {{person.registered | dateFormat:'YYYY/MM/DD'}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef> Is Active </th>
+                <td mat-cell *matCellDef="let person"> {{person.isActive ? 'Is Active' : 'Disabled'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let person">
+                    <button mat-icon-button matTooltip="Edit" (click)="edit(person)">
+                        <mat-icon color="secondary">edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+            <tr mat-row *matRowDef="let person; columns: displayedColumns;" [class.disabled-row]="!person.isActive"></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,15 @@
+// Active bug in angular where the mat-dialog-actions arent positioned properly. Here's a quick fix;
+.modal-container {
+    position: relative;
+    height: 100%;
+}
+
+.close-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.errorMessage {
+    font-size: 12px;
+}

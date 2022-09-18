@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+.person-lookup-card {
+    height: 80vh;
+    max-height: 80vh;
+    @include mat.elevation(8);
+}
+
+.person-table-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(80vh - 32px);
+}
+
+.person-lookup-table {
+    width: 50vw;
+}
+
+.mat-column-name,
+.mat-column-isActive {
+    flex: 1 25%;
+    width: 25%;
+}
+
+.mat-column-registered {
+    flex: 1 40%;
+    width: 40%;
+}
+
+.mat-column-action {
+    flex: 1 10%;
+    width: 10%;
+    min-width: 10%;
+    max-width: 10%;
+}
+
+.disabled-row {
+    td {
+        color: rgb(148, 148, 148) !important;
+    }
+}
