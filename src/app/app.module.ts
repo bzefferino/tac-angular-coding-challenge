@@ -36,7 +36,6 @@ const routes: Routes = [
   { path: 'people/:id', component: PeopleComponent },
   { path: 'people', component: PeopleLookupComponent },
   { path: '**', redirectTo: '/people' },
-
 ]
 
 @NgModule({
